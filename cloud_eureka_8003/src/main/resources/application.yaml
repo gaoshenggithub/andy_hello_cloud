@@ -1,0 +1,15 @@
+server:
+  port: 8003
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://andy:andy@register8002:8002/eureka/,http://andy:andy@register8004:8006/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+spring:
+  security:
+    user:
+      name: andy
+      password: andy

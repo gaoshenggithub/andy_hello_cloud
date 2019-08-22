@@ -1,0 +1,12 @@
+server:
+  port: 8007
+spring:
+  application:
+    name: cloud_consumer_feign
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://andy:andy@localhost:8002/eureka/
+  instance:
+    instance-id: ${spring.application.name}@${server.port}

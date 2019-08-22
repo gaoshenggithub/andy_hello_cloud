@@ -1,0 +1,28 @@
+server:
+  port: 9009
+  servlet:
+    context-path: /andy9009
+spring:
+  application:
+    name: cloud_consumer_feign_fallback_9009
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}@${server.port}
+    home-page-url-path: /andy9009
+    # 增加了context-path 需要被turbine监控 作出此配置
+    metadata-map:
+      cluster: CLOUD_CONSUMER_FEIGN_FALLBACK_9009
+      management:
+        context-path: /andy9009/actuator
+  client:
+    service-url:
+      defaultZone: http://andy:andy@localhost:8002/eureka
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

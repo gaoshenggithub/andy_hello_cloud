@@ -1,0 +1,20 @@
+server:
+  port: 8014
+spring:
+  application:
+    name: cloud_turbine_context_path
+eureka:
+  client:
+    service-url:
+      defaultZone: http://andy:andy@localhost:8002/eureka
+  instance:
+    instance-id: ${spring.application.name}@${server.port}
+    prefer-ip-address: true
+turbine:
+  aggregator: #多个服务被监控的时候需要作出此配置
+    clusterConfig: CLOUD_CONSUMER_FEIGN_FALLBACK_9009,CLOUD_CONSUMER_FEIGN_HYSTRIX_FALLBACKFACTORY_8010
+  appConfig: CLOUD_CONSUMER_FEIGN_FALLBACK_9009,CLOUD_CONSUMER_FEIGN_HYSTRIX_FALLBACKFACTORY_8010
+  clusterNameExpression: metadata['cluster']
+  instanceUrlSuffix:
+    CLOUD_CONSUMER_FEIGN_FALLBACK_9009: andy9009/actuator/hystrix.stream
+    CLOUD_CONSUMER_FEIGN_HYSTRIX_FALLBACKFACTORY_8010: andy8010/actuator/hystrix.stream

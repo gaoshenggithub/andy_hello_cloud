@@ -1,0 +1,16 @@
+server:
+  port: 8012
+spring:
+  application:
+    name: cloud_turbine
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}@${server.port}
+  client:
+    service-url:
+      defaultZone: http://andy:andy@localhost:8002/eureka/
+turbine:
+  aggregator:
+    clusterConfig: CLOUD_CONSUMER_FEIGN_HYSTRIX_FALLBACKFACTORY_8010
+  appConfig: cloud_consumer_feign_hystrix_fallbackfactory_8010
